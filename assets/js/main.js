@@ -68,15 +68,30 @@ function validate() {
 
 function validateContact() {
     let mark = true;
+    let regexName = /^[A-Z]\w{1,20}$/;
     let regexEmail = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    let email =$('#emailz');
+    let name = $('#name-contact');
+    let email =$('#emailz-con');
+    let msg = $('#msg');
 
+    if(!regexName.test(name)) {
+        $('#name-contact').css("border-color", "red");
+    }
+    else {
+        $('#name-contact').css("border-color", "#be9e21");
+    }
     if(!regexEmail.test(email)) {
         $("emailz").css("border-color", "red");
         mark = false;
     }
     else {
         $("email").css("border-color", "#be9e21");
+    }
+    if(msg.length > 300) {
+        $('#msg').css("border-color", "red");
+    }
+    else {
+        $('#msg').css("border-color", "#be9e21");
     }
 
     if(mark) {
@@ -250,6 +265,7 @@ $("body").on("click", '.menu-delete', function(){
 
 $("body").on("click", '.cart-btn', function() {
     let id = $(this).val();
+    alert("Added to cart!");
 
     $.ajax({
         url: "models/products/cart.php",

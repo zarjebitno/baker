@@ -16,16 +16,16 @@
             <div class="contact-form">
               <div id="sendmessage">Your message has been sent. Thank you!</div>
               <div id="errormessage"></div>
-              <form action="" method="post" role="form" class="contactForm" onsubmit="return validateContact(); alert('Your message has been submitted')">
+              <form action="models/contactValidation.php" method="post" role="form" class="contactForm" onsubmit="return validateContact(); alert('Your message has been submitted')">
                 <div class="col-md-6 padding-right-zero">
                   <div class="form-group">
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required/>
+                    <input type="text" name="name" class="form-control" id="name-contact" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required/>
                     <div class="validation"></div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input type="email" class="form-control" name="email" id="emailz" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" required/>
+                    <input type="email" class="form-control" name="email" id="emailz-con" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" required/>
                     <div class="validation"></div>
                   </div>
                 </div>
@@ -37,10 +37,10 @@
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
-                    <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message" required></textarea>
+                    <textarea class="form-control" id="msg" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message" required></textarea>
                     <div class="validation"></div>
                   </div>
-                  <button class="btn btn-primary btn-submit">SEND NOW</button>
+                  <button class="btn btn-primary btn-submit" name="btn-contact">SEND NOW</button>
                 </div>
               </form>
 
