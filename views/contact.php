@@ -16,7 +16,7 @@
             <div class="contact-form">
               <div id="sendmessage">Your message has been sent. Thank you!</div>
               <div id="errormessage"></div>
-              <form action="models/contactValidation.php" method="post" role="form" class="contactForm" onsubmit="return validateContact(); alert('Your message has been submitted')">
+              <form action="models/contactValidation.php" method="post" role="form" class="contactForm" onsubmit="return validateContact();">
                 <div class="col-md-6 padding-right-zero">
                   <div class="form-group">
                     <input type="text" name="name" class="form-control" id="name-contact" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" required/>

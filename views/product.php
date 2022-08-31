@@ -13,7 +13,12 @@
             <h2><?=$product->name?></h2>
             <p><?=$product->description?></p>
             <p class="price"><?=$product->price?> &euro;</p>
-            <button class="btn cart-btn" value="<?=$product->id?>">Add to Cart</button>
+            <?php
+                if(isset($_SESSION['user']))
+                    echo('<button class="btn cart-btn" value="<?=$product->id?>">Add to Cart</button>');
+                else 
+                    echo '<button class="btn btn-default"><a href="#" data-toggle="modal" data-target="#login-modal">Login To Shop</a></button>';
+            ?>
         </div>
     </div>
 </div>

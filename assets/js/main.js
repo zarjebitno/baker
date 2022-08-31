@@ -123,18 +123,18 @@ $("body").on("click", ".post-pag", function(){
 });
 
 $('#search').keyup(function(){
-    let value = $(this).val();
+    let searchValue = $(this).val();
 
         $.ajax({
-            url: "models/products/search.php",
+            url: "models/products/sort-products.php",
             method: "get",
             data: {
-                value : value
+                searchValue : searchValue
             },
             dataType: "json",
             success: function(data) {
-                displayProducts(data);
-                console.log(data);
+                displayProducts(data.items);
+                displayPag(data.num_of_pages);
             }
         })
 })
@@ -150,7 +150,7 @@ $("body").on("change", ".sort", function(){
         },
         dataType: "json",
         success: function(data) {
-            displayProducts(data);
+            displayProducts(data.items);
             displayPag(data.num_of_pages);
         }
     })
@@ -160,15 +160,15 @@ $("body").on("change", ".filter", function(){
     let value = $(this).val();
     
     $.ajax({
-        url: "models/products/filter-category.php",
+        url: "models/products/sort-products.php",
         method: "post",
         data: {
             id : value
         },
         dataType: "json",
         success: function(data) {
-            console.warn(data);
-            displayProducts(data);
+            displayProducts(data.items);
+            displayPag(data.num_of_pages);
         }
     })
 });
@@ -268,13 +268,50 @@ $("body").on("click", '.cart-btn', function() {
     alert("Added to cart!");
 
     $.ajax({
-        url: "models/products/cart.php",
+        // url: "models/products/cart.php",
+        url: "models/cart/add_to_cart.php",
         method: "POST",
         data: {
             item_id : id
         },
         success: function(data) {
-            console.log('kosovo je srbija');
+            console.log(data);
         }
     })
 });
+
+$('.poll-btn').click(function(){
+    let value = $('.poll-option:checked').val();
+    console.log(value);
+})
+
+// remove from cart
+
+$('.cart-delete').on('click', function() {
+    const productID = this.dataset.id
+    const rowToDelete = this.closest('tr');
+
+    $.ajax({
+        url: "models/cart/remove_from_cart.php", 
+        method: "POST",
+        data: {
+            productID
+        },
+        success: function() {
+            rowToDelete.remove()
+            formatCartTableAfterDelete()
+        },
+        error: function(error){ 
+            console.error(error);
+        }
+    });
+})
+
+// why fetch data again when you can just format the order of the table
+function formatCartTableAfterDelete() {
+    const rows = document.querySelectorAll('.cart-table tr:not(:first-of-type)')
+
+    rows.forEach((element, key) => {
+        element.querySelector('th:first-of-type').innerText = ++key
+    });
+}

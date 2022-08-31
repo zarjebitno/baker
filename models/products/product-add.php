@@ -29,9 +29,24 @@ session_start();
         if(!$err) {
             $tmpURL = $image['tmp_name'];
             $fileName = $image['name'];
-            $loc = $_SERVER['DOCUMENT_ROOT']."/ict/Baker/assets/img/items/".$fileName;
+            $loc = ROOT."/assets/img/items/".$fileName;
+            $root = ROOT;
 
             if(move_uploaded_file($tmpURL, $loc)) {
+                $newWidth = 300;
+                $newHeight = 300;
+                list($width, $height) = getimagesize($loc);
+
+                $ext = pathinfo($loc, PATHINFO_EXTENSION);
+
+                $uploadedImg = ($ext == "png") ? imagecreatefrompng($loc) : imagecreatefromjpeg($loc);
+
+                $canvas = imagecreatetruecolor($newWidth, $newHeight);
+                $a = imagecopyresampled($canvas, $uploadedImg, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+                $done = ($ext == "png") ? imagepng($canvas, "$root/assets/img/resize/$fileName.png") : imagejpeg($canvas, "$root/assets/img/resize/$fileName.jpg");
+
+
                 $query = "INSERT INTO product VALUES(NULL, :fileName, :name, :desc, :price, :cat_id)";
     
                 $stmt = $conn->prepare($query);
@@ -57,7 +72,6 @@ session_start();
                 }
             }
             else {
-                $_SESSION['errors'] = "TESER";
                 header("Location: ../../index.php?page=admin");
             }
         }        

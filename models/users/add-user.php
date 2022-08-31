@@ -38,7 +38,7 @@
 
 
         if(count($errors) == 0) {
-            require '../../config/connection.php';
+            require_once '../../config/connection.php';
 
             $pw = md5($pw);
             $query = "INSERT INTO user VALUES(NULL, ?, ?, ?, ?, ?, ?)";

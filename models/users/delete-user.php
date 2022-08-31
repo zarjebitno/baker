@@ -7,7 +7,7 @@ header('Content-Type: application/json');
 if(isset($_GET['idUser'])){
     $id = $_GET['idUser'];
 
-    include "../../config/connection.php";
+    include_once "../../config/connection.php";
 
     $delete = "DELETE FROM user WHERE id = :idUser";
     $q = $conn->prepare($delete);

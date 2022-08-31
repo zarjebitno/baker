@@ -3,8 +3,8 @@
 header("Content-Type: application/json");
 
 if(isset($_GET['limit'])){
-    include "functions.php";
-    include "../../config/connection.php";
+    include_once "functions.php";
+    include_once "../../config/connection.php";
     $limit = $_GET['limit'];
     $products = getProducts($limit); 
     $num_of_pages = get_pagination_count();

@@ -38,5 +38,7 @@ require_once "models/users/functions.php";
 
             <?php endforeach ?>
         </table>
+
+        <a href="models/data_exports.php?data=excel" class="d-block mt-3">Export</a>
     </div>
 </div>

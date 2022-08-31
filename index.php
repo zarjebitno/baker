@@ -1,6 +1,6 @@
 <?php
   session_start();
-  include 'config/connection.php';
+  include_once 'config/connection.php';
   include 'views/fixed/head.php';
   include 'views/fixed/nav.php';
 
@@ -28,7 +28,7 @@
             include "views/admin/users.php";
             include "views/admin/products.php";
             break;
-        }
+          }
         case 'user-add': include "views/partial/user-add.php"; break;
         case 'product-add': include "views/partial/product-add.php"; break;
         case 'product-edit': include "views/partial/product-edit.php"; break;

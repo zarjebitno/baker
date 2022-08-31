@@ -31,7 +31,7 @@ session_start();
         if(!$err) {
             $tmpURL = $image['tmp_name'];
             $fileName = $image['name'];
-            $loc = $_SERVER['DOCUMENT_ROOT']."/ict/Baker/assets/img/items/".$fileName;
+            $loc = ROOT."/assets/img/items/".$fileName;
 
             if(move_uploaded_file($tmpURL, $loc)) {
                 $query = "UPDATE product SET img = :fileName, name = :name, description = :desc, price = :price, category_id = :cat_id WHERE id = :id";

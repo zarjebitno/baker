@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 if(isset($_GET['idProduct'])){
     $id = $_GET['idProduct'];
 
-    include "../../config/connection.php";
+    include_once "../../config/connection.php";
 
     $delete = "DELETE FROM product WHERE id = :idProduct";
     $q = $conn->prepare($delete);

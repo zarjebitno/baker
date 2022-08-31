@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 if(isset($_GET['id'])){
     $id = $_GET['id'];
 
-    include "../../config/connection.php";
+    include_once "../../config/connection.php";
 
     $delete = "DELETE FROM menu WHERE id = :id";
     $q = $conn->prepare($delete);

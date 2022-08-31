@@ -1,8 +1,37 @@
 <?php
-    require "models/menu/functions.php";
+    require_once "models/menu/functions.php";
+    require_once "models/users/functions.php";
+    require_once "models/cart/functions.php";
 ?>
 
 <div class="container" style="padding-top: 120px">
+    <div class="row">
+        <div class="card">
+            <h2>Logged In Past 24H</h2>
+            <p><?=loggedInToday()?></p>
+        </div>
+        <div class="card">
+            <h2>Page Visits Last 24H</h2>
+            
+            <?php 
+                $visits = getByPercentage();
+                foreach($visits as $key => $visit):
+            ?>
+
+            <div class="card-body">
+                <p>
+                   <span><?=$key?></span>
+                   <span><?=$visit['avg']?> %</span>
+                </p>
+            </div>
+
+            <?php endforeach ?>
+        </div>
+        <div class="card">
+            <h2>Total Orders Last 24H</h2>
+            <p><?=getOrderLastDay()?></p>
+        </div>
+    </div>
     <div class="row">
         <div class="title-errors">
             <h2>Menu <a href="index.php?page=menu-add"><i class="fas fa-plus-circle"></i></a></h2></h2>

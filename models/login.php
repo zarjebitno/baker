@@ -2,6 +2,7 @@
 
     session_start();
     require_once '../config/connection.php';
+    require_once '../models/users/functions.php';
 
     if(isset($_POST['btn-login'])) {
         $username = $_POST['username'];
@@ -18,6 +19,7 @@
             $user = $stmt->fetch();
             $_SESSION['success'] = "Successfully logged in.";
             $_SESSION['user'] = $user;
+            echo userLoggedIn($user->id);
             header("Location: ../index.php");
         }
         else {

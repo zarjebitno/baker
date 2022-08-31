@@ -1,6 +1,7 @@
 <?php
     require_once 'config.php';
 
+    define("ROOT", $_SERVER['DOCUMENT_ROOT'].'/ict/baker');
     define("ACCESS_LOG", $_SERVER['DOCUMENT_ROOT']."/ict/Baker/data/log.txt");
 
     try {
@@ -26,16 +27,11 @@
     log_access();
 
     function log_access(){
-        $open = fopen(ACCESS_LOG, "a"); 
-        if($open) {
-            if(empty($_SESSION['user'])) { 
-                $user = "Guest";
-            }
-            else {
-                $user = $_SESSION['user']->username; 
-                $date = date('d-m-Y H:i:s');
-                fwrite($open, "{$_SERVER['PHP_SELF']}\t{$user}\t{$date}\t{$_SERVER['REMOTE_ADDR']}\t\n");
-                fclose($open);
-            }
+        $file = fopen(ACCESS_LOG, "a"); 
+
+        if($file) {
+            $date = date('d-m-Y H:i:s');
+            fwrite($file, "{$_SERVER['PHP_SELF']}?{$_SERVER['QUERY_STRING']}\t{$date}\t{$_SERVER['REMOTE_ADDR']}\t\n");
+            fclose($file);
         }
     }

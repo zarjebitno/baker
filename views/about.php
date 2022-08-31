@@ -30,12 +30,15 @@
                 $query = "SELECT * FROM poll_options po INNER JOIN poll p on po.poll_id = p.id";
                 $rez = executeQuery($query);
                 foreach($rez as $p) {
-                    echo "<tr><td><input type='radio' name='poll-vote' value=".$p->id."</td>".$p->poll_option."</tr>";
+                    echo "<tr><td><input type='radio' name='poll-vote' class='poll-option' value='".$p->id."'</td>".$p->poll_option."</tr>";
                 }
             ?>
         </table>
 
-        <button class="form-control btn btn-submit" name="vote-btn">Vote!</button>
+        <button class="form-control btn btn-submit poll-btn" name="vote-btn">Vote!</button>
     </form>
     <?php endif ?>
+</div>
+<div class="container">
+    <a href="models/data_exports.php?data=word" style="text-align: center; display: block;">Download author export</a>
 </div>
